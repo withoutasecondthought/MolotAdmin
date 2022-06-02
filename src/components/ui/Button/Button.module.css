@@ -1,0 +1,38 @@
+.button {
+    background: none;
+    padding: 10px 15px;
+    line-height: 20px;
+    text-align: center;
+    font-size: 15px;
+    border: 1px solid black;
+    transition-duration: 0.4s;
+    user-select: none;
+    align-self: flex-end;
+    margin: 5px 10px;
+}
+
+.button:hover {
+    color: #fff;
+    background: black;
+    cursor: pointer;
+}
+
+.button:active {
+    border: 1px solid #fff;
+}
+
+.green {
+    border: 1px solid #015c19;
+}
+
+.green:hover{
+    background: #015c19;
+}
+
+.red{
+    border: 1px solid #5c0101;
+}
+
+.red:hover{
+    background: #5c0101;
+}
