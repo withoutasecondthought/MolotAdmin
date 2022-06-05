@@ -1,0 +1,21 @@
+.chunk {
+    border: 1px solid black;
+    display: flex;
+    flex: 1;
+    padding: 10px 15px;
+    margin: 15px 15px;
+    flex-direction: column;
+    justify-content: space-between;
+    transition-duration: 0.4s;
+    min-width: 800px;
+
+}
+
+.chunk:hover {
+    outline: 3px solid black;
+    cursor: pointer;
+}
+
+.reps {
+    text-align: center;
+}

@@ -4,6 +4,9 @@ import SetsPage from "../pages/Sets";
 import TrainingsPage from "../pages/Traininigs";
 import SetsAdd from "../pages/SetsAdd";
 import Lock from "../pages/Lock";
+import TrainingAdd from "../pages/TrainingAdd";
+import TrainingEdit from "../pages/TrainingEdit";
+import ChunkAdd from "../pages/ChunkAdd";
 
 export const ROUTES = {
   LOCK_PAGE: "/",
@@ -12,8 +15,8 @@ export const ROUTES = {
   SETS_EDIT: "/sets/edit/:id",
   TRAININGS: "/trainings",
   TRAININGS_ADD: "/trainings/add",
-  TRAINING_INFO: "/trainings/:id",
-  CHUNKS_EDIT: "/training/:id/edit/:chunkId",
+  TRAINING_EDIT: "/trainings/:id",
+  CHUNK_ADD: "/trainings/:id/add/:chunkId",
 };
 
 const Navigation = () => {
@@ -45,9 +48,9 @@ const Navigation = () => {
       <Route path={ROUTES.SETS_ADD} element={<SetsAdd />} />
       <Route path={ROUTES.SETS_EDIT} element={<SetsAdd />} />
       <Route path={ROUTES.TRAININGS} element={<TrainingsPage />} />
-      <Route path={ROUTES.TRAININGS_ADD} element={<TrainingsPage />} />
-      <Route path={ROUTES.TRAINING_INFO} element={<TrainingsPage />} />
-      <Route path={ROUTES.CHUNKS_EDIT} element={<TrainingsPage />} />
+      <Route path={ROUTES.TRAININGS_ADD} element={<TrainingAdd />} />
+      <Route path={ROUTES.TRAINING_EDIT} element={<TrainingEdit />} />
+      <Route path={ROUTES.CHUNK_ADD} element={<ChunkAdd />} />
     </Routes>
   );
 };

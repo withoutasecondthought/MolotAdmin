@@ -1,0 +1,23 @@
+.spinner {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    align-self: stretch;
+    align-items: center;
+
+}
+
+.img {
+    height: 50px;
+    width: 50px;
+    animation: rotation 0.8s infinite linear;
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

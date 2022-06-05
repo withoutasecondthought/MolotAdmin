@@ -13,8 +13,7 @@
     user-select: none;
 }
 .training:hover {
-    border: 1px solid white;
-    background: black;
-    color: white;
+    outline: 2px solid black;
+
     cursor: pointer;
 }

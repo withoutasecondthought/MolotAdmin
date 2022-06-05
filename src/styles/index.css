@@ -33,8 +33,26 @@ code {
 }
 
 
+
 .input {
   margin: 10px 15px;
   padding: 10px 15px;
   max-height: 30px;
+}
+
+.textarea {
+  display: flex;
+  flex: 1;
+  align-self: stretch;
+  margin: 10px 15px;
+  padding: 10px 15px;
+}
+
+*::-webkit-scrollbar {
+  background: white;
+  width: 5px;
+}
+
+*::-webkit-scrollbar-thumb{
+  background: black;
 }

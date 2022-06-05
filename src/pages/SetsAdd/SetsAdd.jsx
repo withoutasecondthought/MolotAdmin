@@ -4,13 +4,15 @@ import Footer from "../../components/Footer";
 import Button from "../../components/ui/Button";
 import { useNavigate, useParams } from "react-router-dom";
 import instance from "../../libs/instance";
+import {ROUTES} from "../../navigation/Navigation";
+import Skeleton from "../../components/Skeleton";
 
 const SetsAdd = () => {
   const navigate = useNavigate();
   const name = useRef();
   const description = useRef();
   const params = useParams();
-  let id = params.id;
+  let {id} = params;
   const [alreadyExist, setAlreadyExist] = useState({});
 
   const getItem = () => {
@@ -26,16 +28,16 @@ const SetsAdd = () => {
     } else {
       getItem();
     }
-  }, [getItem]);
+  }, []);
 
   const sendSet = (name, description) => {
-    if (name !== "" && description !== "") {
+    if (name !== "") {
       instance
         .post(`/set/${id}`, {
-          name: { name },
-          description: description,
+          name,
+          description,
         })
-        .then((r) => console.log(r))
+        .then(() => navigate(ROUTES.SETS))
         .catch((e) => console.log(e));
     } else {
       alert("Ошибка заполните поля");
@@ -46,26 +48,32 @@ const SetsAdd = () => {
     <div className={"app"}>
       <Header />
       <div className={"wrap"}>
-        <input
-          className={"input"}
-          defaultValue={alreadyExist.name}
-          ref={name}
-          placeholder={"Название"}
-        />
-        <input
-          className={"input"}
-          defaultValue={alreadyExist.description}
-          ref={description}
-          placeholder={"Описание"}
-        />
+        <Skeleton isLoaded={!id || alreadyExist?.name}>
+          <input
+              className={"input"}
+              defaultValue={alreadyExist.name}
+              ref={name}
+              placeholder={"Название"}
+          />
+          <textarea
+              className={"textarea"}
+              defaultValue={alreadyExist.description}
+              ref={description}
+              placeholder={"Описание"}
+          />
+        </Skeleton>
       </div>
       <Footer>
         <Button
-          text={"Добавить"}
+          text={"Сохранить"}
           color={"green"}
           onClick={() => sendSet(name.current.value, description.current.value)}
         />
-        <Button text={"Отмена"} color={"green"} onClick={() => navigate(-1)} />
+        <Button
+            text={"Отмена"}
+            color={"green"}
+            onClick={() => navigate(-1)}
+        />
       </Footer>
     </div>
   );

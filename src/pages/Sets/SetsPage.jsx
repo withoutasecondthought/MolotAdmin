@@ -5,14 +5,20 @@ import Button from "../../components/ui/Button";
 import Set from "../../components/Set";
 import { useNavigate } from "react-router-dom";
 import instance from "../../libs/instance";
+import Skeleton from "../../components/Skeleton";
 
 const SetsPage = () => {
   const navigate = useNavigate();
   const [sets, setSets] = useState([]);
+  const [filteredSets, setFilteredSets] = useState([])
 
   useEffect(() => {
     getSets();
   }, []);
+
+  useEffect(() => {
+    setFilteredSets(sets)
+  }, [sets])
 
   const getSets = () => {
     instance
@@ -22,7 +28,7 @@ const SetsPage = () => {
   };
 
   const filterArr = (e) => {
-    setSets(
+    setFilteredSets(
       sets.filter((item) =>
         item.name.toLowerCase().includes(e.target.value.toLowerCase())
       )
@@ -34,32 +40,38 @@ const SetsPage = () => {
   };
 
   return (
-    <div className={"app"}>
-      <Header />
-      <div className={"wrap"}>
-        <input
-          onChange={(e) => filterArr(e)}
-          id={"input"}
-          className={"input"}
-          placeholder={"Поиск"}
-        />
-        {sets.map((set) => (
-          <Set
-            key={set.id}
-            name={set.name}
-            description={set.description}
-            onClick={() => toSet(set._id)}
-          />
-        ))}
-      </div>
-      <Footer>
-        <Button
-          text={"Добавить"}
-          color={"green"}
-          onClick={() => navigate("add")}
-        />
-      </Footer>
-    </div>
+
+        <div className={"app"}>
+          <Header />
+          <div className={"wrap"}>
+            <input
+                onChange={(e) => filterArr(e)}
+                id={"input"}
+                className={"input"}
+                placeholder={"Поиск"}
+            />
+            <Skeleton isLoaded={sets.length}>
+              {filteredSets.map((set) => (
+                  <Set
+                      key={set.id}
+                      id={set.id}
+                      name={set.name}
+                      description={set.description}
+                      onClick={() => toSet(set._id)}
+                  />
+              ))}
+            </Skeleton>
+          </div>
+          <Footer>
+            <Button
+                text={"Добавить"}
+                color={"green"}
+                onClick={() => navigate("add")}
+            />
+          </Footer>
+        </div>
+
+
   );
 };
 

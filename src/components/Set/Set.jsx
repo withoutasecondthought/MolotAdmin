@@ -1,11 +1,13 @@
 import React from "react";
 import style from "./Set.module.css";
 
-const Set = ({ onClick, name, description }) => {
+const Set = ({ id, onClick, name, description }) => {
   return (
     <div onClick={onClick} className={style.set}>
-      <div>{name}</div>
-      <div>{description}</div>
+      <div>
+        {id}. {name}
+      </div>
+      <div>{description.substring(0, 50)}</div>
     </div>
   );
 };

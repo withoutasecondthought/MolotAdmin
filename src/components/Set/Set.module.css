@@ -5,7 +5,8 @@
     flex: 1;
     max-height: 40px;
 
-    justify-content: space-evenly;
+    justify-content: space-between;
+    padding: 0 15px;
     border: 1px solid black;
     line-height: 40px;
 
@@ -13,8 +14,7 @@
     user-select: none;
 }
 .set:hover {
-    border: 1px solid white;
-    background: black;
-    color: white;
+    outline: 2px solid black;
+
     cursor: pointer;
 }
