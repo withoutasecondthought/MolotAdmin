@@ -7,7 +7,7 @@ const Set = ({ id, onClick, name, description }) => {
       <div>
         {id}. {name}
       </div>
-      <div>{description.substring(0, 50)}</div>
+      <div>{description.substring(0, 30)}</div>
     </div>
   );
 };

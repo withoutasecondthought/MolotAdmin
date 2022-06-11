@@ -16,6 +16,10 @@ const ChunkSet = ({ _id, id, name, type, param, onDelete, onChange }) => {
     }
   }, []);
 
+  useEffect(() => {
+    onChangeHandler();
+  }, [changeType]);
+
   const onChangeHandler = () => {
     const tp = changeType ? "reps" : "time";
     onChange({
@@ -33,7 +37,6 @@ const ChunkSet = ({ _id, id, name, type, param, onDelete, onChange }) => {
         className={style.selection}
         onClick={() => {
           setChangeType((prevState) => !prevState);
-          onChangeHandler();
         }}
       >
         <div className={changeType === false ? style.selected : ""}>
@@ -50,6 +53,7 @@ const ChunkSet = ({ _id, id, name, type, param, onDelete, onChange }) => {
         defaultValue={param}
         ref={parameters}
         onChange={onChangeHandler}
+        type={"number"}
       />
       <Button text={"Удалить"} onClick={onDelete} />
     </div>

@@ -15,8 +15,7 @@ const TrainingAdd = () => {
       .post("/training", {
         name,
       })
-      .then((r) => {
-        console.log(r.data);
+      .then(() => {
         navigate(ROUTES.TRAININGS);
       })
       .catch((e) => {

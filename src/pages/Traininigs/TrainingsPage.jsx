@@ -50,7 +50,6 @@ const TrainingsPage = () => {
               onClick={() => navigate(item._id)}
               key={item._id}
               name={item.name}
-              logic={item.logic}
             />
           ))}
         </Skeleton>

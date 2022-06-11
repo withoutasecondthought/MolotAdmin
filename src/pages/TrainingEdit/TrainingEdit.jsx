@@ -13,13 +13,15 @@ const TrainingEdit = () => {
   const navigate = useNavigate();
   const [training, setTraining] = useState({});
   const [logic, setLogic] = useState([]);
+  const [loaded, setLoaded] = useState(false);
 
   const getTraining = () => {
     instance
       .get(`/training/${params.id}`)
       .then((r) => {
-        setTraining(r.data[0]);
-        setLogic(r.data[0].logic);
+        setTraining(r.data);
+        setLogic(r.data.logic);
+        setLoaded(true);
       })
       .catch((e) => console.log(e));
   };
@@ -28,30 +30,49 @@ const TrainingEdit = () => {
     getTraining();
   }, []);
 
+  const newChunk = (index) => {
+    setLoaded(false);
+    instance
+      .post("/chunk", {
+        trainingId: params.id,
+        index,
+      })
+      .then((r) => navigate(`add/${r.data._id}`))
+      .catch((e) => console.log(e));
+  };
+
+  const deleteChunk = (_id) => {
+    setLoaded(false);
+    instance
+      .post(`/chunk/delete/${params.id}/${_id}`, {})
+      .then(() => getTraining())
+      .catch((e) => console.log(e));
+  };
+
   return (
     <div className={"app"}>
       <Header />
       <div className={"wrap"}>
-        <div className={style.title}>{training.name}</div>
-        <Skeleton isLoaded={logic.length}>
+        <div className={style.title}>{training?.name}</div>
+        <Skeleton isLoaded={loaded}>
           <div className={style.map}>
             <Button
               text={"Добавить блок здесь"}
               onClick={() => {
-                navigate("add/0");
+                newChunk(0);
               }}
             />
             {logic.map((item, index) => (
-              <div className={style.item}>
+              <div key={item._id} className={style.item}>
                 <Chunk
                   onClick={() => navigate(`add/${item._id}`)}
-                  key={item._id}
                   reps={item.reps}
                   sets={item.sets}
+                  onDelete={() => deleteChunk(item._id)}
                 />
                 <Button
                   onClick={() => {
-                    navigate(`add/${index + 1}`);
+                    newChunk(index + 1);
                   }}
                   key={Math.random()}
                   text={"Добавить блок здесь"}

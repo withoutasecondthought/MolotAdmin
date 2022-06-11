@@ -4,7 +4,7 @@ import Footer from "../../components/Footer";
 import Button from "../../components/ui/Button";
 import { useNavigate, useParams } from "react-router-dom";
 import instance from "../../libs/instance";
-import {ROUTES} from "../../navigation/Navigation";
+import { ROUTES } from "../../navigation/Navigation";
 import Skeleton from "../../components/Skeleton";
 
 const SetsAdd = () => {
@@ -12,13 +12,13 @@ const SetsAdd = () => {
   const name = useRef();
   const description = useRef();
   const params = useParams();
-  let {id} = params;
+  let { id } = params;
   const [alreadyExist, setAlreadyExist] = useState({});
 
   const getItem = () => {
     instance
       .get(`/set/${id}`)
-      .then((r) => setAlreadyExist(r.data[0]))
+      .then((r) => setAlreadyExist(r.data))
       .catch((e) => console.log(e));
   };
 
@@ -50,16 +50,16 @@ const SetsAdd = () => {
       <div className={"wrap"}>
         <Skeleton isLoaded={!id || alreadyExist?.name}>
           <input
-              className={"input"}
-              defaultValue={alreadyExist.name}
-              ref={name}
-              placeholder={"Название"}
+            className={"input"}
+            defaultValue={alreadyExist.name}
+            ref={name}
+            placeholder={"Название"}
           />
           <textarea
-              className={"textarea"}
-              defaultValue={alreadyExist.description}
-              ref={description}
-              placeholder={"Описание"}
+            className={"textarea"}
+            defaultValue={alreadyExist.description}
+            ref={description}
+            placeholder={"Описание"}
           />
         </Skeleton>
       </div>
@@ -69,11 +69,7 @@ const SetsAdd = () => {
           color={"green"}
           onClick={() => sendSet(name.current.value, description.current.value)}
         />
-        <Button
-            text={"Отмена"}
-            color={"green"}
-            onClick={() => navigate(-1)}
-        />
+        <Button text={"Отмена"} color={"green"} onClick={() => navigate(-1)} />
       </Footer>
     </div>
   );

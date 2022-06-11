@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import style from "./ChunkItem.module.css";
 
 const ChunkItem = ({ id, type, param, name }) => {
   const [types, setTypes] = useState("");
@@ -19,7 +20,7 @@ const ChunkItem = ({ id, type, param, name }) => {
   }, []);
 
   return (
-    <div>
+    <div className={style.wrap}>
       <div>
         {id}. {name}
       </div>
